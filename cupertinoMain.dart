@@ -1,31 +1,30 @@
-// ignore_for_file: sort_child_properties_last
-
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_study/animalitem.dart';
-import 'package:flutter_study/cupertinoMain.dart';
-import 'package:flutter_study/firstPage.dart';
-import 'package:flutter_study/secondPage.dart';
+import 'package:flutter_study/iosSub/cupertinoFirstPage.dart';
 
-void main() {
-  runApp(const CupertinoMain());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class CupertinoMain extends StatefulWidget {
+  const CupertinoMain({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<CupertinoMain> createState() => _CupertinoMainState();
 }
 
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  TabController? controller;
+class _CupertinoMainState extends State<CupertinoMain> {
+  CupertinoTabBar? tabBar;
   List<Animal> animalList = List.empty(growable: true);
 
   @override
   void initState() {
     super.initState();
-    controller = TabController(length: 2, vsync: this);
-
+    tabBar = CupertinoTabBar(items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(icon: Icon(CupertinoIcons.home)),
+      BottomNavigationBarItem(
+        icon: Icon(
+          CupertinoIcons.add,
+        ),
+      ),
+    ]);
     animalList.add(Animal(
         animalName: "벌",
         kind: "곤충",
@@ -69,44 +68,23 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   }
 
   @override
-  void dispose() {
-    controller!.dispose();
-    super.dispose();
-  }
-
-  // This widget is the root of your application.
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('TabBar Example'),
-        ),
-        body: TabBarView(
-          children: [
-            FirstApp(list: animalList),
-            const SecondApp(),
-          ],
-          controller: controller,
-        ),
-        bottomNavigationBar: TabBar(
-          controller: controller,
-          tabs: const [
-            Tab(
-              icon: Icon(
-                Icons.looks_one,
-                color: Colors.blue,
-              ),
-            ),
-            Tab(
-              icon: Icon(
-                Icons.looks_two,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return CupertinoApp(
+      home: CupertinoTabScaffold(
+          tabBar: tabBar!,
+          tabBuilder: (context, value) {
+            if (value == 0) {
+              return Container(
+                child: CupertinoFirstPage(animalList: animalList),
+              );
+            } else {
+              return Container(
+                child: const Center(
+                  child: Text("cupertino tab 2"),
+                ),
+              );
+            }
+          }),
     );
   }
 }

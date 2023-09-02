@@ -37,23 +37,23 @@ class _SecondAppState extends State<SecondApp> {
                       value: 0,
                       groupValue: _radioValue,
                       onChanged: _radioChange),
-                  Text("양서류"),
+                  const Text("양서류"),
                   Radio(
                       value: 0,
                       groupValue: _radioValue,
                       onChanged: _radioChange),
-                  Text("파충류"),
+                  const Text("파충류"),
                   Radio(
                       value: 0,
                       groupValue: _radioValue,
                       onChanged: _radioChange),
-                  Text("포유류"),
+                  const Text("포유류"),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Can fly ???"),
+                  const Text("Can fly ???"),
                   Checkbox(
                       value: flyExist,
                       onChanged: (bool? check) {
@@ -62,7 +62,7 @@ class _SecondAppState extends State<SecondApp> {
                       })
                 ],
               ),
-              ElevatedButton(onPressed: () {}, child: Text('동물 추가하기'))
+              ElevatedButton(onPressed: () {}, child: const Text('동물 추가하기'))
             ],
           ),
         ),

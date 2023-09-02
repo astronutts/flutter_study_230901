@@ -3,7 +3,7 @@ import 'package:flutter_study/animalitem.dart';
 
 class FirstApp extends StatelessWidget {
   final List<Animal>? list;
-  FirstApp({super.key, this.list});
+  const FirstApp({super.key, this.list});
 
   @override
   Widget build(BuildContext context) {
